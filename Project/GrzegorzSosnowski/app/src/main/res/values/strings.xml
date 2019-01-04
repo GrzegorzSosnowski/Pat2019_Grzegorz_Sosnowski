@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Grzegorz.Sosnowski</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="main_screen">Main Screen</string>
 </resources>
