@@ -13,8 +13,8 @@ import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
 
+    private int SPLASH_WAIT = 5000;
 
-    Timer sTimer = new Timer();
 
 
     @Override
@@ -23,40 +23,39 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        // splashTimer();
-
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                cancelSplash();
+            }
+        }, SPLASH_WAIT);
     }
+
+
 
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        sCondition();
-    }
-
-    private void splashTimer() {
-
-
-        try {
-            Thread.sleep(5000);
-            sCondition();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        cancelSplash();
 
 
     }
 
 
-    private TimerTask sCondition() {
-        sTimer.cancel();
+
+
+
+
+    private void cancelSplash() {
+
 
         Intent mainIntent = new Intent(this,MainActivity.class);
         this.startActivity(mainIntent);
         this.finish();
 
-        return null;
+
     }
 
 }
