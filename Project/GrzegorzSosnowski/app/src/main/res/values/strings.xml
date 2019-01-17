@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Grzegorz.Sosnowski</string>
+    <string name="login_screen">Login Screen</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
-    <string name="main_screen">Main Screen</string>
+    <string name="sign_in">Sign in</string>
+    <string name="main_activity">Main Screen</string>
+    <string name="sign_out">Sign Out</string>
+
 </resources>
