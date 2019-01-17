@@ -5,40 +5,51 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-
-
 public class SplashScreen extends AppCompatActivity {
-    public int condition = 1;
+    public  boolean condition = false;
+    public int SPLASH_WAIT = 5000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        int SPLASH_WAIT = 5000;
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                if (condition==1)
-                    cancelSplash();
+        if(savedInstanceState != null) {
+            condition = savedInstanceState.getBoolean("condition");
+            cancelSplash();
+        }
+        else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (!condition)
+                        cancelSplash();
 
-            }
-        }, SPLASH_WAIT);
+                }
+            }, SPLASH_WAIT);
+        }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        condition=0;
-        cancelSplash();
+        if(!condition)
+            cancelSplash();
     }
 
     private void cancelSplash() {
+        condition = true;
         Intent mainIntent = new Intent(this,MainActivity.class);
         this.startActivity(mainIntent);
         this.finish();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean("condition",true);
+    }
 }
 
 
