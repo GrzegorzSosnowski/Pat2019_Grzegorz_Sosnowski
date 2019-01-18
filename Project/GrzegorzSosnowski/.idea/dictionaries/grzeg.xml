@@ -11,6 +11,8 @@
       <w>pmatcher</w>
       <w>ppattern</w>
       <w>pvalid</w>
+      <w>signedin</w>
+      <w>signout</w>
     </words>
   </dictionary>
 </component>
