@@ -3,8 +3,14 @@
     <words>
       <w>grzegorzsosnowski</w>
       <w>grzegorzsovngarde</w>
+      <w>lmatcher</w>
+      <w>lpattern</w>
+      <w>lvalid</w>
       <w>mainscreen</w>
       <w>mainscreenintent</w>
+      <w>pmatcher</w>
+      <w>ppattern</w>
+      <w>pvalid</w>
     </words>
   </dictionary>
 </component>
