@@ -1,13 +1,14 @@
 package eu.grzegorzsovngarde.grzegorzsosnowski;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 
 public class Mainscreen extends AppCompatActivity {
-   public Boolean isSignedin;
+        public Boolean isSignedin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +22,15 @@ public class Mainscreen extends AppCompatActivity {
             }
     }
     public void onClick(View v) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+
         String Signout = "Signed Out";
         //Perform sign out only if user was signed in
         if(isSignedin) {
             //Pass information that user was signed out
             Intent mainIntent = new Intent(this, MainActivity.class);
             mainIntent.putExtra("Signout",Signout);
+            pref.edit().remove("SignedIn").apply();
             this.startActivity(mainIntent);
         }
     }

@@ -1,45 +1,56 @@
 package eu.grzegorzsovngarde.grzegorzsosnowski;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
-    public  boolean condition = false;
+    public  boolean splashcondition = false;
     public int SPLASH_WAIT = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
 
-        if(savedInstanceState != null) {
-            condition = savedInstanceState.getBoolean("condition");
-            cancelSplash();
+        setContentView(R.layout.splash_screen);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        boolean signedIn = pref.getBoolean("SignedIn", false);
+        if(!signedIn) {
+            if (savedInstanceState != null) {
+                splashcondition = savedInstanceState.getBoolean("splashcondition");
+                cancelSplash();
+            } else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!splashcondition)
+                            cancelSplash();
+
+                    }
+                }, SPLASH_WAIT);
+            }
         }
         else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (!condition)
-                        cancelSplash();
-
-                }
-            }, SPLASH_WAIT);
+            Boolean isSignedin = true;
+            Intent mainScreenIntent = new Intent(this, Mainscreen.class);
+            mainScreenIntent.putExtra("isSignedin",isSignedin);
+            this.startActivity(mainScreenIntent);
         }
     }
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(!condition)
+        if(!splashcondition)
             cancelSplash();
     }
 
     private void cancelSplash() {
-        condition = true;
+        splashcondition = true;
         Intent mainIntent = new Intent(this,MainActivity.class);
         this.startActivity(mainIntent);
         this.finish();
@@ -48,7 +59,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBoolean("condition",true);
+        savedInstanceState.putBoolean("splashcondition",true);
     }
 }
 
