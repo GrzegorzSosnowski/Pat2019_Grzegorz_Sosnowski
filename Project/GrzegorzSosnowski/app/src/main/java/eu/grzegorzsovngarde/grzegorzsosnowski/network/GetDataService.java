@@ -11,6 +11,6 @@ import retrofit2.http.GET;
 
 public interface GetDataService {
 
-    @GET("page_1/")
+    @GET("photos")
     Call<List<RetroPhoto>> getAllPhotos();
 }
