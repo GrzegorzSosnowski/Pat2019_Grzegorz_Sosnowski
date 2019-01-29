@@ -6,5 +6,8 @@
     <string name="main_activity">Main Screen</string>
     <string name="sign_out">Sign Out</string>
     <string name="incorrect_credentials">Incorrect Credentials</string>
+    <string name="image">Image</string>
+    <string name="title">title</string>
+    <string name="desc">desc</string>
 
 </resources>
